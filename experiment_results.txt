@@ -1,0 +1,2 @@
+minkloc3d.txt, config_baseline.txt, model_MinkFPN_GeM_20210419_1510, 71.82, 21.07, 71.82, 21.07
+minkloc3d.txt, config_baseline.txt, model_MinkFPN_GeM_20210419_1531, 74.58, 25.24, 74.58, 25.24
