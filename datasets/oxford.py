@@ -119,7 +119,7 @@ class OxfordDataset(Dataset):
         file_path = os.path.join(self.dataset_path, filename)
         pc = np.fromfile(file_path, dtype=np.float64)
         # coords are within -1..1 range in each dimension
-        assert pc.shape[0] == self.n_points * 4, "Error in point cloud shape: {}".format(filename)
+        # assert pc.shape[0] == self.n_points * 4, "Error in point cloud shape: {}".format(filename)    #　can take arbitry number of points as input
         # pc = np.reshape(pc, (pc.shape[0] // 3, 3))
         pc = np.reshape(pc, (pc.shape[0] // 4, 4))
         pc = pc[:, :3]

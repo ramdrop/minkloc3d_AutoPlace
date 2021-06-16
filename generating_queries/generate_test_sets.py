@@ -34,7 +34,7 @@ def construct_query_and_database_sets(base_path, runs_folder, folders, pointclou
             df_database = df_database.append(row, ignore_index=True)
 
         # df_database
-        df_locations = pd.read_csv(os.path.join(BASE_DIR, base_path, runs_folder, folder, 'val.csv'), sep=',')
+        df_locations = pd.read_csv(os.path.join(BASE_DIR, base_path, runs_folder, folder, 'test.csv'), sep=',')
         df_locations = df_locations.rename(columns={'index': 'file'})
         df_locations = df_locations.rename(columns={'x': 'northing'})
         df_locations = df_locations.rename(columns={'y': 'easting'})
@@ -76,7 +76,7 @@ def construct_query_and_database_sets(base_path, runs_folder, folders, pointclou
             database[len(database.keys())] = {'query': row['file'], 'northing': row['northing'], 'easting': row['easting']}
 
         # test
-        df_locations = pd.read_csv(os.path.join(BASE_DIR, base_path, runs_folder, folder, 'val.csv'), sep=',')
+        df_locations = pd.read_csv(os.path.join(BASE_DIR, base_path, runs_folder, folder, 'test.csv'), sep=',')
         df_locations = df_locations.rename(columns={'index': 'file'})
         df_locations = df_locations.rename(columns={'x': 'northing'})
         df_locations = df_locations.rename(columns={'y': 'easting'})

@@ -32,23 +32,63 @@ def make_eval_dataset(params: MinkLocParams):
     dataset = OxfordDataset(params.dataset_folder, params.test_file, transform=None)
     return dataset
 
+# --------------------------------- for original LiDAR pointcloud -------------------------------- #
+# def make_collate_fn(dataset: OxfordDataset, mink_quantization_size=None):
+#     # set_transform: the transform to be applied to all batch elements
+#     def collate_fn(data_list):
+#         # Constructs a batch object
+#         clouds = [e[0] for e in data_list]
+#         labels = [e[1] for e in data_list]
+#         batch = torch.stack(clouds, dim=0)  # Produces (batch_size, n_points, 3) tensor
+#         if dataset.set_transform is not None:
+#             # Apply the same transformation on all dataset elements
+#             batch = dataset.set_transform(batch)
 
+#         if mink_quantization_size is None:
+#             # Not a MinkowskiEngine based model
+#             batch = {'cloud': batch}
+#         else:
+#             coords = [ME.utils.sparse_quantize(coordinates=e, quantization_size=mink_quantization_size) for e in batch]
+#             coords = ME.utils.batched_coordinates(coords)
+#             # Assign a dummy feature equal to 1 to each point
+#             # Coords must be on CPU, features can be on GPU - see MinkowskiEngine documentation
+#             feats = torch.ones((coords.shape[0], 1), dtype=torch.float32)
+#             batch = {'coords': coords, 'features': feats}
+
+#         # Compute positives and negatives mask
+#         # dataset.queries[label]['positives'] is bitarray
+#         positives_mask = [[dataset.queries[label]['positives'][e] for e in labels] for label in labels]
+#         negatives_mask = [[dataset.queries[label]['negatives'][e] for e in labels] for label in labels]
+
+#         positives_mask = torch.tensor(positives_mask)
+#         negatives_mask = torch.tensor(negatives_mask)
+
+#         # Returns (batch_size, n_points, 3) tensor and positives_mask and
+#         # negatives_mask which are batch_size x batch_size boolean tensors
+#         return batch, positives_mask, negatives_mask
+
+#     return collate_fn
+
+
+# ------------------------- for variant number of points in a pointcloud ------------------------- #
 def make_collate_fn(dataset: OxfordDataset, mink_quantization_size=None):
     # set_transform: the transform to be applied to all batch elements
     def collate_fn(data_list):
         # Constructs a batch object
         clouds = [e[0] for e in data_list]
         labels = [e[1] for e in data_list]
-        batch = torch.stack(clouds, dim=0)  # Produces (batch_size, n_points, 3) tensor
-        if dataset.set_transform is not None:
-            # Apply the same transformation on all dataset elements
-            batch = dataset.set_transform(batch)
+        # batch = torch.stack(clouds, dim=0)  # Produces (batch_size, n_points, 3) tensor
+        # if dataset.set_transform is not None:
+        #     # Apply the same transformation on all dataset elements
+        #     batch = dataset.set_transform(batch)
 
         if mink_quantization_size is None:
             # Not a MinkowskiEngine based model
-            batch = {'cloud': batch}
+            # batch = {'cloud': batch}
+            pass
         else:
-            coords = [ME.utils.sparse_quantize(coordinates=e, quantization_size=mink_quantization_size) for e in batch]
+            # coords = [ME.utils.sparse_quantize(coordinates=e, quantization_size=mink_quantization_size) for e in batch]
+            coords = [ME.utils.sparse_quantize(coordinates=e, quantization_size=mink_quantization_size) for e in clouds]
             coords = ME.utils.batched_coordinates(coords)
             # Assign a dummy feature equal to 1 to each point
             # Coords must be on CPU, features can be on GPU - see MinkowskiEngine documentation

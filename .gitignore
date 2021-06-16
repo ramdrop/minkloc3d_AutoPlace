@@ -132,3 +132,5 @@ dmypy.json
 .idea
 
 
+tf_logs/
+weights/
