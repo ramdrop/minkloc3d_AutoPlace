@@ -134,3 +134,4 @@ dmypy.json
 
 tf_logs/
 weights/
+*pickle

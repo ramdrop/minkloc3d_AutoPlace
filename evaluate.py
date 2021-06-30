@@ -15,6 +15,8 @@ import random
 from misc.utils import MinkLocParams
 from models.model_factory import model_factory
 
+from ipdb import set_trace
+
 DEBUG = False
 
 
@@ -141,12 +143,19 @@ def get_latent_vectors(model, set, device, params):
     embeddings = np.vstack(embeddings_l)
     return embeddings
 
-
+LOG_FEAT = 0
 def get_recall(m, n, database_vectors, query_vectors, query_sets, database_sets, log=False):
     # Original PointNetVLAD code
+    global LOG_FEAT
+    # set_trace()
     database_output = database_vectors[m]
     queries_output = query_vectors[n]
-
+    if LOG_FEAT == 0:
+        with open(os.path.join('minkloc3d_feature.pickle'), 'wb') as handle:
+            feature = {'qFeat': queries_output, 'dbFeat': database_output}
+            pickle.dump(feature, handle, protocol=pickle.HIGHEST_PROTOCOL)
+            print('features saved')
+            LOG_FEAT = 1
     # When embeddings are normalized, using Euclidean distance gives the same
     # nearest neighbour search results as using cosine distance
     database_nbrs = KDTree(database_output)
