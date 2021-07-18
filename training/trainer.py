@@ -13,7 +13,9 @@ import pathlib
 
 from torch.utils.tensorboard import SummaryWriter
 import sys
-sys.path.append('/home/kaiwen/Documents/github/MinkLoc3D_ws/minkloc3d_marked')
+
+sys.path.append(
+    '/home/kaiwen/Documents/github/MinkLoc3D_ws/minkloc3d_nuscenes')
 from eval.evaluate import evaluate, print_eval_stats
 from misc.utils import MinkLocParams, get_datetime
 from models.loss import make_loss
