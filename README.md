@@ -77,7 +77,7 @@ To evaluate pretrained models run the following commands:
 cd eval
 
 # To evaluate the model trained on the Baseline Dataset
-python evaluate.py --config ./config/config_baseline.txt --model_config ./models/minkloc3d.txt --weights ./weights/model_MinkFPN_GeM_20210630_1409_final.pth
+python evaluate.py --config ./config/config_baseline.txt --model_config ./models/minkloc3d.txt --weights ./weights/model_MinkFPN_GeM_20210718_2132_final.pth
 ```
 
 ## Results
