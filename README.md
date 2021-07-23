@@ -79,6 +79,6 @@ python evaluate.py --config ./config/config_baseline.txt --model_config ./models
 
 | Method         | nuScenes Radar  |
 | -------------- |---------------- | 
-| **MinkLoc3D**  |     **25.24**   |
+| **MinkLoc3D**  |     **Recall@1/5/10=29.2/51.4/59.6**   |
 
 
