@@ -27,7 +27,7 @@ export PYTHONPATH=$PYTHONPATH:/home/.../MinkLoc3D
 ```
 
 ### nuScenes Radar Dataset Processing
-Boston split has 17785 frames, devide it into four parts: database, train_query, val_query, test_query. 
+Boston split has 17785 frames, divide it into four parts: database, train_query, val_query, test_query. 
 
 - Train: stack database and train_query to form a mixed 'train tuple', where the length of query = len(database+trainquery).
 
@@ -35,12 +35,7 @@ Boston split has 17785 frames, devide it into four parts: database, train_query,
  
 ```generate pickles
 cd generating_queries/ 
-
-# Generate training tuples for the Baseline Dataset
-python generate_training_tuples_baseline.py
-
-# Generate evaluation tuples
-python generate_test_sets.py
+./generate.sh
 ```
 
 ```
@@ -49,7 +44,7 @@ python generate_test_sets.py
 │   ├── minkloc3d_marked
 │   ├── minkloc3d_nuscenes
 │   ├── nuscenes_radar
-│   │   └── 7n5s_1024_xy1__drop
+│   │   └── 7n5s_xy11
 ```
 
 ### Training
