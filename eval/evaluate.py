@@ -11,14 +11,12 @@ import argparse
 import torch
 import MinkowskiEngine as ME
 import random
-
+import sys
+sys.path.append(os.getcwd())
 from misc.utils import MinkLocParams
 from models.model_factory import model_factory
 
-from ipdb import set_trace
-
 DEBUG = False
-
 
 def evaluate(model, device, params, log=False):
     # Run evaluation on all eval datasets
@@ -291,4 +289,3 @@ if __name__ == "__main__":
 
     stats = evaluate(model, device, params, args.log)
     print_eval_stats(stats)
-

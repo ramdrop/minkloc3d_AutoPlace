@@ -9,7 +9,7 @@ import pickle
 import random
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-base_path = "../../nuscenes_radar/"
+base_path = "../nuscenes_dataset/"
 
 runs_folder = "./"
 filename = "database_train.csv"
@@ -58,10 +58,10 @@ for folder in folders:
     df_locations = df_locations.rename(columns={'y': 'easting'})
 
     for index, row in df_locations.iterrows():
-        row['file'] = '/home/kaiwen/Documents/github/MinkLoc3D_ws/nuscenes_radar/' + folder + pointcloud_fols + '{:0>5d}.bin'.format(int(row['file']))
+        row['file'] = '../nuscenes_dataset/' + folder + pointcloud_fols + '{:0>5d}.bin'.format(int(row['file']))
         df_train = df_train.append(row, ignore_index=True)
 
 print("Number of training submaps: " + str(len(df_train['file'])))
 # print("Number of non-disjoint test submaps: " + str(len(df_test['file'])))
-construct_query_dict(df_train, "training_queries_baseline.pickle")
+construct_query_dict(df_train, "../nuscenes_dataset/training_queries_baseline.pickle")
 # construct_query_dict(df_test, "test_queries_baseline.pickle")

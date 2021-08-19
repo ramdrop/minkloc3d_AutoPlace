@@ -2,7 +2,7 @@
 This repo is modified from [`jac99/MinkLoc3D`](https://github.com/jac99/MinkLoc3D).
 
 ### MinkLoc3D paper environment
-Code was tested using Python 3.8 with PyTorch 1.7 and MinkowskiEngine 0.4.3 on Ubuntu 18.04 with CUDA 10.2.
+Code was tested with Python 3.8 with PyTorch 1.7 and MinkowskiEngine 0.4.3 on Ubuntu 18.04 with CUDA 10.2.
 
 The following Python packages are required:
 * PyTorch (version 1.7)
@@ -37,52 +37,44 @@ Boston split has 17785 frames, which are divided into four splits: `database`, `
 
 - test phase: `database` vs. `val_query`
  
-```generate pickles
-cd generating_queries/ 
-./generate.sh
+copy the processed nuScenes dataset (from milliPlace) to the following directory:
 ```
-
-```
-├── MinkLoc3D_ws
-│   ├── benchmark_datasets
-│   ├── minkloc3d_marked
-│   ├── minkloc3d_nuscenes
+├── minkloc3d_milliPlace
 │   ├── nuscenes_radar
 │   │   └── 7n5s_xy11
 ```
 
+generate pickles
+```
+cd minkloc3d_milliPlace/nuscenes_dataset/ 
+./generate.sh
+```
+
 ### Training
-To train **MinkLoc3D** network, download and decompress the dataset and generate training pickles as described above.
-Edit the configuration file (`config_baseline.txt`). 
-Set `dataset_folder` parameter to the dataset root folder.
-Modify `batch_size_limit` parameter depending on available GPU memory. 
-Default limit (=256) requires at least 11GB of GPU RAM.
 
-To train the network, run:
+Edit the configuration file `config_baseline.txt`:
+- `dataset_folder` : the dataset root folder.
+- `batch_size_limit` : depends on available GPU memory (default limit (256) requires at least 11GB of GPU RAM).
 
-```train baseline
-cd training
+Start training:
 
-# To train minkloc3d model on the Baseline Dataset
+```
+cd minkloc3d_milliPlace
+
 python training/train.py --config ./config/config_baseline.txt --model_config ./models/minkloc3d.txt
 
 ```
 
 ### Evaluation
 
-To evaluate pretrained models run the following commands:
+```
+cd minkloc3d_milliPlace
 
-```eval baseline
-cd eval
-
-# To evaluate the model trained on the Baseline Dataset
-python evaluate.py --config ./config/config_baseline.txt --model_config ./models/minkloc3d.txt --weights ./weights/model_MinkFPN_GeM_20210718_2132_final.pth
+python eval/evaluate.py --config ./config/config_baseline.txt --model_config ./models/minkloc3d.txt --weights ./weights/model_MinkFPN_GeM_20210819_1446_final.pth
 ```
 
-## Results
+### Results
 
-| Method         | nuScenes Radar  |
-| -------------- |---------------- | 
-| **MinkLoc3D**  |     **Recall@1/5/10=29.2/51.4/59.6**   |
+MinkLoc3D on nuScenes radar dataset: Recall@1/5/10 = 31.8% / 53.6% / 61.1%.
 
 

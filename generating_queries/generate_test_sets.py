@@ -118,7 +118,7 @@ def construct_query_and_database_sets(base_path, runs_folder, folders, pointclou
 
 # Building database and query files for evaluation
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-base_path = "../../nuscenes_radar/"
+base_path = "../nuscenes_dataset/"
 
 # For Oxford
 folders = []
@@ -130,7 +130,7 @@ for index in index_list:
     folders.append(all_folders[index])
 
 print(folders)
-construct_query_and_database_sets(base_path, runs_folder, folders, "/pcl/", "pointcloud_locations_20m.csv", "oxford")
+construct_query_and_database_sets(base_path, runs_folder, folders, "/pcl/", "pointcloud_locations_20m.csv", "../nuscenes_dataset/oxford")
 
 # #For University Sector
 # folders = []

@@ -3,10 +3,10 @@
 
 import argparse
 import torch
-import sys
-sys.path.append('/home/kaiwen/Documents/github/MinkLoc3D_ws/minkloc3d_nuscenes')
-from training.trainer import do_train
-# from trainer import do_train
+# import sys
+# sys.path.append('../')
+# from training.trainer import do_train
+from trainer import do_train
 from misc.utils import MinkLocParams
 from datasets.dataset_utils import make_dataloaders
 

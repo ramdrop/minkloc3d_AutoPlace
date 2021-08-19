@@ -3,11 +3,8 @@ import pandas as pd
 from os.path import join
 import numpy as np
 
-# DATABASE = join('./../../nuscenes_radar/7n5s_xy11', 'database.csv')
-# TRAIN = join('./../../nuscenes_radar/7n5s_xy11', 'train.csv')
-
-DATABASE = join('./../../nuscenes_radar/7n5s_xy11', 'database.csv')
-TRAIN = join('./../../nuscenes_radar/7n5s_xy11', 'train.csv')
+DATABASE = join('../nuscenes_dataset/7n5s_xy11', 'database.csv')
+TRAIN = join('../nuscenes_dataset/7n5s_xy11', 'train.csv')
 
 database = pd.read_csv(DATABASE).values
 train = pd.read_csv(TRAIN).values

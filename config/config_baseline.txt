@@ -1,7 +1,7 @@
 [DEFAULT]
 num_points = 1024
 
-dataset_folder = /home/kaiwen/Documents/github/MinkLoc3D_ws/nuscenes_radar
+dataset_folder = nuscenes_dataset
 
 [TRAIN]
 num_workers = 4
