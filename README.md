@@ -1,14 +1,7 @@
 # MinkLoc3D for nuScenes Radar Dataset
-- This repo is modified from [`jac99/MinkLoc3D`](https://github.com/jac99/MinkLoc3D)
+This repo is modified from [`jac99/MinkLoc3D`](https://github.com/jac99/MinkLoc3D).
 
-### Environment
-* Ubuntu 18.04, CUDA 10.2, GeForce RTX 2070 Mobile / Max-Q Refresh
-* Python 3.8.8
-* PyTorch 1.8.1
-* MinkowskiEngine 0.5.2 (note the version difference between the [`jac99/MinkLoc3D`](https://github.com/jac99/MinkLoc3D) and this repo results in an API change: ME.utils.sparse_quantize(coords>>>coordinates, feats>>>features))
-* pytorch-metric-learning 0.9.98
-
-### Original paper environment (ignore)
+### MinkLoc3D paper environment
 Code was tested using Python 3.8 with PyTorch 1.7 and MinkowskiEngine 0.4.3 on Ubuntu 18.04 with CUDA 10.2.
 
 The following Python packages are required:
@@ -20,18 +13,29 @@ The following Python packages are required:
 * psutil
 * bitarray
 
-
 Modify the `PYTHONPATH` environment variable to include absolute path to the project root folder: 
 ```export PYTHONPATH
 export PYTHONPATH=$PYTHONPATH:/home/.../MinkLoc3D
 ```
 
-### nuScenes Radar Dataset Processing
-Boston split has 17785 frames, divide it into four parts: database, train_query, val_query, test_query. 
+### milliPlace paper environment
+* Ubuntu 18.04, CUDA 10.2, GeForce RTX 2070 Mobile / Max-Q Refresh
+* Python 3.8.8
+* PyTorch 1.8.1
+* MinkowskiEngine 0.5.2 (note the version discrepancy between the [`jac99/MinkLoc3D`](https://github.com/jac99/MinkLoc3D) and this repo results in an API change: ME.utils.sparse_quantize(coords > change to > coordinates, feats > change to > features))
+* pytorch-metric-learning 0.9.98
 
-- Train: stack database and train_query to form a mixed 'train tuple', where the length of query = len(database+trainquery).
 
-- Val: database vs. val_query
+
+
+### nuScenes dataset pre-processing
+Boston split has 17785 frames, which are divided into four splits: `database`, `train_query`, `val_query`, `test_query`. 
+
+- train phase: stack `database` and `train_query` to form a mixed 'train tuple', where the length of query = len(`database`+`train_query`).
+
+- val phase: `database` vs. `val_query`
+
+- test phase: `database` vs. `val_query`
  
 ```generate pickles
 cd generating_queries/ 

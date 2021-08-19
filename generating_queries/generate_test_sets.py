@@ -11,7 +11,7 @@ BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 
 
 def output_to_file(output, filename):
-    with open(os.path.join('../../nuscenes_radar/', filename), 'wb') as handle:
+    with open(filename, 'wb') as handle:
         pickle.dump(output, handle, protocol=pickle.HIGHEST_PROTOCOL)
     print("Done ", filename)
 
@@ -30,7 +30,7 @@ def construct_query_and_database_sets(base_path, runs_folder, folders, pointclou
         df_locations = df_locations.rename(columns={'x': 'northing'})
         df_locations = df_locations.rename(columns={'y': 'easting'})
         for index, row in df_locations.iterrows():
-            row['file'] = '../../nuscenes_radar/' + folder + pointcloud_fols + '{:0>5d}.bin'.format(int(row['file']))
+            row['file'] = '/home/kaiwen/Documents/github/MinkLoc3D_ws/nuscenes_radar/' + folder + pointcloud_fols + '{:0>5d}.bin'.format(int(row['file']))
             df_database = df_database.append(row, ignore_index=True)
 
         # df_database
@@ -39,9 +39,9 @@ def construct_query_and_database_sets(base_path, runs_folder, folders, pointclou
         df_locations = df_locations.rename(columns={'x': 'northing'})
         df_locations = df_locations.rename(columns={'y': 'easting'})
         for index, row in df_locations.iterrows():
-            row['file'] = '../../nuscenes_radar/' + folder + pointcloud_fols + '{:0>5d}.bin'.format(int(row['file']))
+            row['file'] = '/home/kaiwen/Documents/github/MinkLoc3D_ws/nuscenes_radar/' + folder + pointcloud_fols + '{:0>5d}.bin'.format(int(row['file']))
             df_test = df_test.append(row, ignore_index=True)
-        
+
         # df_locations = pd.read_csv(os.path.join(BASE_DIR, base_path, runs_folder, folder, filename), sep=',')
         # # df_locations['timestamp']=runs_folder+folder+pointcloud_fols+df_locations['timestamp'].astype(str)+'.bin'
         # # df_locations=df_locations.rename(columns={'timestamp':'file'})
@@ -72,7 +72,7 @@ def construct_query_and_database_sets(base_path, runs_folder, folders, pointclou
         df_locations = df_locations.rename(columns={'x': 'northing'})
         df_locations = df_locations.rename(columns={'y': 'easting'})
         for index, row in df_locations.iterrows():
-            row['file'] = '../../nuscenes_radar/' + folder + pointcloud_fols + '{:0>5d}.bin'.format(int(row['file']))
+            row['file'] = '/home/kaiwen/Documents/github/MinkLoc3D_ws/nuscenes_radar/' + folder + pointcloud_fols + '{:0>5d}.bin'.format(int(row['file']))
             database[len(database.keys())] = {'query': row['file'], 'northing': row['northing'], 'easting': row['easting']}
 
         # test
@@ -81,7 +81,7 @@ def construct_query_and_database_sets(base_path, runs_folder, folders, pointclou
         df_locations = df_locations.rename(columns={'x': 'northing'})
         df_locations = df_locations.rename(columns={'y': 'easting'})
         for index, row in df_locations.iterrows():
-            row['file'] = '../../nuscenes_radar/' + folder + pointcloud_fols + '{:0>5d}.bin'.format(int(row['file']))
+            row['file'] = '/home/kaiwen/Documents/github/MinkLoc3D_ws/nuscenes_radar/' + folder + pointcloud_fols + '{:0>5d}.bin'.format(int(row['file']))
             test[len(test.keys())] = {'query': row['file'], 'northing': row['northing'], 'easting': row['easting']}
 
 

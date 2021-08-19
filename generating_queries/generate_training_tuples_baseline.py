@@ -41,7 +41,7 @@ def construct_query_dict(df_centroids, filename):
         random.shuffle(negatives)
         queries[i] = {"query": query, "positives": positives, "negatives": negatives}
 
-    with open(os.path.join(base_path, filename), 'wb') as handle:
+    with open(filename, 'wb') as handle:
         pickle.dump(queries, handle, protocol=pickle.HIGHEST_PROTOCOL)
 
     print("Done ", filename)
@@ -58,7 +58,7 @@ for folder in folders:
     df_locations = df_locations.rename(columns={'y': 'easting'})
 
     for index, row in df_locations.iterrows():
-        row['file'] = '../../nuscenes_radar/' + folder + pointcloud_fols + '{:0>5d}.bin'.format(int(row['file']))
+        row['file'] = '/home/kaiwen/Documents/github/MinkLoc3D_ws/nuscenes_radar/' + folder + pointcloud_fols + '{:0>5d}.bin'.format(int(row['file']))
         df_train = df_train.append(row, ignore_index=True)
 
 print("Number of training submaps: " + str(len(df_train['file'])))
